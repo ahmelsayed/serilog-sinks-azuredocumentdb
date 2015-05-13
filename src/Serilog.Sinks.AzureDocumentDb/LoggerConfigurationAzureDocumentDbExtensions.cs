@@ -42,13 +42,14 @@ namespace Serilog
             string databaseName = "Diagnostics",
             string collectionName = "Logs",
             LogEventLevel restrictedToMinimumLevel = LevelAlias.Minimum,
-            IFormatProvider formatProvider = null)
+            IFormatProvider formatProvider = null,
+            bool renderMessage = true)
         {
             if (loggerConfiguration == null) throw new ArgumentNullException("loggerConfiguration");
             if (endpointUri == null) throw new ArgumentNullException("endpointUri");
             if (authorizationKey == null) throw new ArgumentNullException("authorizationKey");
             return loggerConfiguration.Sink(
-                new AzureDocumentDBSink(endpointUri, authorizationKey, databaseName, collectionName, formatProvider),
+                new AzureDocumentDBSink(endpointUri, authorizationKey, databaseName, collectionName, formatProvider, renderMessage),
                 restrictedToMinimumLevel);
         }
     }
